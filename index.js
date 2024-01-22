@@ -1,5 +1,12 @@
+function randomizeColor() {
+  let red = Math.floor(Math.random() * 255);
+  let green = Math.floor(Math.random() * 255);
+  let blue = Math.floor(Math.random() * 255);
+
+  return [red, green, blue];
+}
+
 function drawGrid(container, squares) {
-  
   // Create rows
   for (let i = 1; i <= squares; i++) {
     const row = document.createElement("div");
@@ -18,7 +25,8 @@ function drawGrid(container, squares) {
   const columns = document.querySelectorAll(".col");
   columns.forEach((col) => {
     col.addEventListener("mouseenter", () => {
-      col.style.backgroundColor = "black";
+      const [red, green, blue] = randomizeColor();
+      col.style.backgroundColor = `rgb(${red}, ${green}, ${blue})`;
     })
   })
 }
