@@ -1,26 +1,44 @@
-// Create wrapper
+function drawGrid(container, squares) {
+  
+  // Create rows
+  for (let i = 1; i <= squares; i++) {
+    const row = document.createElement("div");
+    row.classList.add("row");
+    
+    // Create columns
+    for (let j = 1; j <= squares; j++) {
+      const col = document.createElement("div");
+      col.classList.add("col");
+      row.appendChild(col);
+    }
+  
+    container.appendChild(row);
+  }
+  
+  const columns = document.querySelectorAll(".col");
+  columns.forEach((col) => {
+    col.addEventListener("mouseenter", () => {
+      col.style.backgroundColor = "black";
+    })
+  })
+}
+
+// Create button
+const btnNew = document.createElement("button");
+btnNew.textContent = "Set number of squares";
+document.body.appendChild(btnNew);
 const gridWrapper = document.createElement("div");
 gridWrapper.classList.add("grid-wrapper");
 document.body.appendChild(gridWrapper);
 
-// Create rows
-for (let i = 1; i <= 16; i++) {
-  const row = document.createElement("div");
-  row.classList.add("row");
+btnNew.addEventListener("click", () => {
+  let numberOfSquares;
+  do {
+    numberOfSquares = +prompt("Enter number of squares (max of 100");
+  } while (numberOfSquares > 100);
   
-  // Create columns
-  for (let j = 1; j <= 16; j++) {
-    const col = document.createElement("div");
-    col.classList.add("col");
-    row.appendChild(col);
-  }
+  // Create wrapper
+  gridWrapper.innerText = "";
 
-  gridWrapper.appendChild(row);
-}
-
-const columns = document.querySelectorAll(".col");
-columns.forEach((col) => {
-  col.addEventListener("mouseenter", () => {
-    col.style.backgroundColor = "red";
-  })
+  drawGrid(gridWrapper, numberOfSquares);
 })
